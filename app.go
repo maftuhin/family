@@ -2,8 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"family/database"
-	"family/routes"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -14,11 +12,11 @@ import (
 // Run Application
 func main() {
 	app := fiber.New(fiber.Config{})
-	database.DBConn = gormDb()
+	// database.DBConn = gormDb()
 	app.Static("/public", "./public")
-	routes.SetUpRoute(app)
+	// routes.SetUpRoute(app)
 
-	app.Post("family/update/:id", func(c *fiber.Ctx) error {
+	app.Post("", func(c *fiber.Ctx) error {
 		return c.SendString("")
 	})
 
