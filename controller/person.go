@@ -22,7 +22,7 @@ func CreatePerson(c *fiber.Ctx) error {
 	if create.Error == nil {
 		return c.JSON(body)
 	} else {
-		return c.JSON(fiber.Map{"message": "error"})
+		return c.JSON(fiber.Map{"message": create.Error})
 	}
 }
 
