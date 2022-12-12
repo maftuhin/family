@@ -22,7 +22,7 @@ func main() {
 		return c.SendString("")
 	})
 
-	log.Fatal(app.Listen(":80"))
+	log.Fatal(app.Listen(":8000"))
 }
 
 func gormDb() *gorm.DB {
