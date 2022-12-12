@@ -2,6 +2,8 @@ package main
 
 import (
 	"database/sql"
+	"family/database"
+	"family/routes"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -12,9 +14,9 @@ import (
 // Run Application
 func main() {
 	app := fiber.New(fiber.Config{})
-	// database.DBConn = gormDb()
+	database.DBConn = gormDb()
 	app.Static("/public", "./public")
-	// routes.SetUpRoute(app)
+	routes.SetUpRoute(app)
 
 	app.Post("", func(c *fiber.Ctx) error {
 		return c.SendString("")
@@ -25,7 +27,7 @@ func main() {
 
 func gormDb() *gorm.DB {
 	// sqlDB, err := sql.Open("mysql", "remote:8Belas0694@tcp(limaefdua.com:3306)/family")
-	sqlDB, _ := sql.Open("mysql", "root:@tcp(localhost:3306)/family")
+	sqlDB, _ := sql.Open("mysql", "root:8Belas0694@@tcp(localhost:3306)/family")
 	gormDB, err := gorm.Open(mysql.New(mysql.Config{
 		Conn: sqlDB,
 	}), &gorm.Config{
