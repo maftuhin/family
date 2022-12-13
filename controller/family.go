@@ -34,10 +34,10 @@ func FamilyTree(c *fiber.Ctx) error {
 		"image":    person.Image,
 		"gender":   person.Gender,
 		"address":  person.Address,
-		"father":   father,
-		"mother":   mother,
+		"dad":      father,
+		"mom":      mother,
+		"partner":  spouse,
 		"brothers": brothers,
-		"spouse":   spouse,
 		"children": child,
 	})
 }
