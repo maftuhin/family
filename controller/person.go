@@ -64,6 +64,10 @@ func UpdatePerson(c *fiber.Ctx) error {
 	if err != nil {
 		return c.SendString(err.Error())
 	}
-	db.Model(&body).Updates(body)
-	return c.JSON(body)
+	result := db.Model(&body).Updates(body)
+	if result.Error == nil {
+		return c.JSON(body)
+	} else {
+		return c.JSON(result.Error)
+	}
 }
