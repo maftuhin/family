@@ -7,7 +7,7 @@ type Person struct {
 	Name   string `json:"name"`
 	Image  string `json:"image"`
 	Gender string `json:"gender,omitempty"`
-	Father string `json:"father,omitempty"`
+	Father string `json:"fid,omitempty"`
 	Mother string `json:"mid,omitempty"`
 	Spouse string `json:"sid,omitempty"`
 
