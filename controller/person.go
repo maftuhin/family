@@ -33,7 +33,7 @@ func SearchPerson(c *fiber.Ctx) error {
 	query := c.Query("q")
 	// sql
 	var member []models.Person
-	sql := db.Select("name", "address", "uid").Where("name like ?", "%"+query+"%")
+	sql := db.Select("name", "address", "uid").Where("name like ?", "%"+query+"%").Order("name ASC")
 	// paging
 	paginator := paging.Paging(&paging.Param{
 		DB:    sql,
