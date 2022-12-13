@@ -33,7 +33,7 @@ func SearchPerson(c *fiber.Ctx) error {
 	query := c.Query("q")
 	// sql
 	var member []models.Person
-	sql := db.Where("name like ?", "%"+query+"%")
+	sql := db.Select("name", "address", "uid").Where("name like ?", "%"+query+"%")
 	// paging
 	paginator := paging.Paging(&paging.Param{
 		DB:    sql,
@@ -64,7 +64,9 @@ func UpdatePerson(c *fiber.Ctx) error {
 	if err != nil {
 		return c.SendString(err.Error())
 	}
-	result := db.Model(&body).Updates(body)
+	result := db.Model(&body).Updates(models.Person{
+		Name: body.Name,
+	})
 	if result.Error == nil {
 		return c.JSON(body)
 	} else {
