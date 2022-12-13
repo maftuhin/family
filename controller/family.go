@@ -20,7 +20,7 @@ func FamilyTree(c *fiber.Ctx) error {
 	db.First(&mother, "uuid=?", person.Mother)
 	// spouse
 	var spouse models.Person
-	db.First(&spouse, "uuid=?", person.Suppose)
+	db.First(&spouse, "uuid=?", person.Spouse)
 	// brother
 	var brothers []models.Person
 	db.Where("father=? AND mother=? AND uuid!=?", person.Father, person.Mother, person.UUID).Limit(10).Find(&brothers)
