@@ -30,6 +30,7 @@ func FamilyTree(c *fiber.Ctx) error {
 
 	return c.JSON(fiber.Map{
 		"id":       person.ID,
+		"uid":      person.UID,
 		"name":     person.Name,
 		"image":    person.Image,
 		"gender":   person.Gender,
