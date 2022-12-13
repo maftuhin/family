@@ -23,10 +23,10 @@ func FamilyTree(c *fiber.Ctx) error {
 	db.First(&spouse, "uuid=?", person.Spouse)
 	// brother
 	var brothers []models.Person
-	db.Where("father=? AND mother=? AND uuid!=?", person.Father, person.Mother, person.UUID).Limit(10).Find(&brothers)
+	db.Where("father=? AND mother=? AND uuid!=?", person.Father, person.Mother, person.UID).Limit(10).Find(&brothers)
 	// child
 	var child []models.Person
-	db.Where("father=? OR mother=?", person.UUID, person.UUID).Limit(10).Find(&child)
+	db.Where("father=? OR mother=?", person.UID, person.UID).Limit(10).Find(&child)
 
 	return c.JSON(fiber.Map{
 		"id":       person.ID,

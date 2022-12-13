@@ -3,7 +3,7 @@ package models
 // Member represent an object
 type Person struct {
 	ID     int    `json:"id"`
-	UUID   string `json:"uuid"`
+	UID    string `json:"uid"`
 	Name   string `json:"name"`
 	Image  string `json:"image"`
 	Gender string `json:"gender,omitempty"`

@@ -17,7 +17,7 @@ func CreatePerson(c *fiber.Ctx) error {
 	if err != nil {
 		return c.SendString(err.Error())
 	}
-	body.UUID = uuid.New().String()
+	body.UID = uuid.New().String()
 	create := db.Create(&body)
 	if create.Error == nil {
 		return c.JSON(body)
