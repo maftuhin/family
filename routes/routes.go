@@ -13,4 +13,5 @@ func SetUpRoute(app *fiber.App) {
 	app.Get("person/:id", controller.PersonDetail)
 
 	app.Get("family/tree/:id", controller.FamilyTree)
+	app.Get("family/fix", controller.FixNullValue)
 }

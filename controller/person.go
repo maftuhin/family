@@ -71,3 +71,10 @@ func UpdatePerson(c *fiber.Ctx) error {
 		return c.Status(400).JSON(result.Error)
 	}
 }
+
+func FixNullValue(c *fiber.Ctx) error {
+	db := database.DBConn
+
+	result := db.Raw("UPDATE people SET father=NULL where father=''")
+	return c.JSON(result)
+}
