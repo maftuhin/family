@@ -8,6 +8,7 @@ import (
 
 func SetUpRoute(app *fiber.App) {
 	app.Post("person/create", controller.CreatePerson)
+	app.Post("person/update/:id", controller.UpdatePerson)
 	app.Get("person/search", controller.SearchPerson)
 	app.Get("person/:id", controller.PersonDetail)
 

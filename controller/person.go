@@ -56,3 +56,14 @@ func PersonDetail(c *fiber.Ctx) error {
 	}
 	return c.Status(400).JSON(&fiber.Map{"message": "Tidak Ditemukan"})
 }
+
+func UpdatePerson(c *fiber.Ctx) error {
+	db := database.DBConn
+	var body models.Person
+	err := c.BodyParser(&body)
+	if err != nil {
+		return c.SendString(err.Error())
+	}
+	db.Model(&body).Updates(body)
+	return c.JSON(body)
+}
