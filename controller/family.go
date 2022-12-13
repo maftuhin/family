@@ -11,19 +11,19 @@ func FamilyTree(c *fiber.Ctx) error {
 	id := c.Params("id")
 	db := database.DBConn
 	var person models.Person
-	db.First(&person, "uuid=?", id)
+	db.First(&person, "uid=?", id)
 	// father
 	var father models.Person
-	db.First(&father, "uuid=?", person.Father)
+	db.First(&father, "uid=?", person.Father)
 	// mother
 	var mother models.Person
-	db.First(&mother, "uuid=?", person.Mother)
+	db.First(&mother, "uid=?", person.Mother)
 	// spouse
 	var spouse models.Person
-	db.First(&spouse, "uuid=?", person.Spouse)
+	db.First(&spouse, "uid=?", person.Spouse)
 	// brother
 	var brothers []models.Person
-	db.Where("father=? AND mother=? AND uuid!=?", person.Father, person.Mother, person.UID).Limit(10).Find(&brothers)
+	db.Where("father=? AND mother=? AND uid!=?", person.Father, person.Mother, person.UID).Limit(10).Find(&brothers)
 	// child
 	var child []models.Person
 	db.Where("father=? OR mother=?", person.UID, person.UID).Limit(10).Find(&child)
