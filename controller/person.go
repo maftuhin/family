@@ -75,6 +75,11 @@ func UpdatePerson(c *fiber.Ctx) error {
 func FixNullValue(c *fiber.Ctx) error {
 	db := database.DBConn
 
-	result := db.Raw("UPDATE people SET father=NULL where father=''")
-	return c.JSON(result)
+	db.Exec("UPDATE people SET mother=NULL where mother=''")
+	db.Exec("UPDATE people SET spouse=NULL where spouse=''")
+	result := db.Exec("UPDATE people SET father=NULL where father=''")
+	if result.Error == nil {
+		return c.JSON(&fiber.Map{"message": "success"})
+	}
+	return c.Status(400).JSON(&fiber.Map{"message": "failed"})
 }

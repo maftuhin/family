@@ -10,23 +10,25 @@ import (
 func FamilyTree(c *fiber.Ctx) error {
 	id := c.Params("id")
 	db := database.DBConn
+	var column = []string{"uid", "name", "gender", "spouse"}
+
 	var person models.Person
 	db.First(&person, "uid=?", id)
 	// father
 	var father models.Person
-	db.First(&father, "uid=?", person.Father)
+	db.Select(column).First(&father, "uid=?", person.Father)
 	// mother
 	var mother models.Person
-	db.First(&mother, "uid=?", person.Mother)
+	db.Select(column).First(&mother, "uid=?", person.Mother)
 	// spouse
 	var spouse models.Person
-	db.First(&spouse, "uid=?", person.Spouse)
+	db.Select(column).First(&spouse, "uid=?", person.Spouse)
 	// brother
 	var brothers []models.Person
-	db.Where("father=? AND mother=? AND uid!=?", person.Father, person.Mother, person.UID).Limit(10).Find(&brothers)
+	db.Select(column).Where("father=? AND mother=? AND uid!=?", person.Father, person.Mother, person.UID).Limit(10).Find(&brothers)
 	// child
 	var child []models.Person
-	db.Where("father=? OR mother=?", person.UID, person.UID).Limit(10).Find(&child)
+	db.Select(column).Where("father=? OR mother=?", person.UID, person.UID).Limit(10).Find(&child)
 
 	return c.JSON(fiber.Map{
 		"id":       person.ID,
