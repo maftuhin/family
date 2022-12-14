@@ -10,7 +10,7 @@ import (
 func FamilyTree(c *fiber.Ctx) error {
 	id := c.Params("id")
 	db := database.DBConn
-	var column = []string{"uid", "name", "gender", "spouse"}
+	var column = []string{"uid", "name", "gender", "spouse", "image"}
 
 	var person models.Person
 	db.First(&person, "uid=?", id)

@@ -50,7 +50,7 @@ func PersonDetail(c *fiber.Ctx) error {
 
 	var person models.Person
 
-	result := db.First(&person, "uuid=?", uuid)
+	result := db.First(&person, "uid=?", uuid)
 	if result.RowsAffected > 0 {
 		return c.JSON(person)
 	}
